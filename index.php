@@ -2,7 +2,7 @@ public function index()
 {
 
     // used for deduct the current users's view on home page
-    @$this->home_model->addUserPageViews($this->input->ip_address());
+    @$this->db->insert('table_name', $this->input->ip_address());
 
     // used to get the browser
     $browser_type = $this->_get_browser_name($_SERVER['HTTP_USER_AGENT']);
@@ -12,7 +12,7 @@ public function index()
     {
         $_SESSION['page_views']['some_unique_string'] = true;
         // update your database
-        @$this->home_model->getVisitorBrowserType($browser_type, $this->input->ip_address());
+        @$this->db->insert('table_name', array('Browser_Type' => $browser_type, 'IP_Address' => $ip_address));
         }
     } 
     $this->load->view('index', $data);
